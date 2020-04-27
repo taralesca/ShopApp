@@ -15,8 +15,6 @@
     <string name="password_hint">Password</string>
     <string name="log_in_hint">Log In</string>
     <string name="register_hint">Register</string>
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Password</string>
     <string name="submit_hint">Submit</string>
     <string name="buy_button_hint">Buy</string>
 </resources>
