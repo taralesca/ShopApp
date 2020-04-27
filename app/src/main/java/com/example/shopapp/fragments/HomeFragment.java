@@ -24,14 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements RVAdapter.OnTapListener {
-    private List<Item> users;
+    private List<Item> items;
     private RVAdapter adapter = new RVAdapter(new String[]{}, this);
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        users = new ArrayList<>();
+        items = new ArrayList<>();
 //        try {
 //            final JsonArrayRequest jsonArrayRequest = getUserList();
 //            RequestQueueSingleton.getInstance(getContext()).addToRequestQueue(jsonArrayRequest);
@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment implements RVAdapter.OnTapListener {
         super.onViewCreated(view, savedInstanceState);
 
         try {
-            users.addAll(new GetAllItems(getContext()).execute().get());
+            items.addAll(new GetAllItems(getContext()).execute().get());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment implements RVAdapter.OnTapListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void updateRecyclerView() {
         adapter.swapDataSet(
-                users.stream()
+                items.stream()
                         .map(user -> user.getTitle() + " " + user.getDescription() + " " + user.getPrice())
                         .toArray(String[]::new)
         );
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment implements RVAdapter.OnTapListener {
     public void onUserClick(int position) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame, new ItemDetailsFragment(users.get(position)));
+        fragmentTransaction.replace(R.id.main_frame, new ItemDetailsFragment(items.get(position)));
         fragmentTransaction.commit();
     }
 

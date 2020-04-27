@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.shopapp.R;
 import com.example.shopapp.model.DeleteItem;
@@ -44,6 +46,10 @@ public class ItemDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 new DeleteItem(getContext(), item.getId()).execute();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.main_frame, new HomeFragment());
+                fragmentTransaction.commit();
             }
         });
 
