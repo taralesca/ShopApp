@@ -16,8 +16,5 @@
         android:id="@+id/it_sell"
         android:icon="@drawable/baseline_add_black_18dp"
         android:title="Sell" />
-    <!--    <item-->
-    <!--        android:id="@+id/it_acc"-->
-    <!--        android:icon="@drawable/baseline_person_outline_black_18dp"-->
-    <!--        android:title="Account" />-->
+
 </menu>

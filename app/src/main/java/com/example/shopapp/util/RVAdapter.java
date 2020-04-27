@@ -60,7 +60,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TextViewHolder> {
         LinearLayout linearLayout;
         TextView titleView;
         TextView priceView;
-        //        ImageView image;
         OnTapListener onTapListener;
 
         TextViewHolder(LinearLayout v, OnTapListener onTapListener) {

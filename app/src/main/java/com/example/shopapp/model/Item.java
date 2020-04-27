@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 @Entity
 public class Item {
-    private int userId;
     @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo(name = "title")
@@ -18,26 +17,14 @@ public class Item {
     private String description;
     @ColumnInfo(name = "price")
     private Double price;
-//    private String image;
 
     public Item() {
     }
 
-
-    public Item(int userId, String title, String description, Double price) {
-        this.userId = userId;
+    public Item(String title, String description, Double price) {
         this.title = title;
         this.description = description;
         this.price = price;
-//        this.image = image;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public int getId() {
@@ -72,21 +59,11 @@ public class Item {
         this.price = price;
     }
 
-    //    public String getImage() {
-//        return image;
-//    }
-
-//    public void setImage(String image) {
-//        this.image = image;
-//    }
-
     public Item fromJSON(JSONObject data) throws JSONException {
         this.id = data.getInt("id");
         this.title = data.getString("title");
         this.description = data.getString("description");
-        this.userId = data.getInt("userId");
         this.price = data.getDouble("price");
-//        this.image = data.getString("image");
         return this;
     }
 }

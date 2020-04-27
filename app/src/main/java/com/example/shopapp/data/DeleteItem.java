@@ -1,7 +1,9 @@
-package com.example.shopapp.model;
+package com.example.shopapp.data;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.example.shopapp.model.Item;
 
 public class DeleteItem extends AsyncTask<Void, Void, Boolean> {
     private Context context;

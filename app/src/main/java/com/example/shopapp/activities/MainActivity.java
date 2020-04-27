@@ -25,18 +25,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
             startActivity(intent);
         }
-
-
-//        timer =new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        },5000);
     }
-
-
 }

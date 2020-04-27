@@ -1,7 +1,9 @@
-package com.example.shopapp.model;
+package com.example.shopapp.data;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.example.shopapp.model.Item;
 
 import java.util.List;
 

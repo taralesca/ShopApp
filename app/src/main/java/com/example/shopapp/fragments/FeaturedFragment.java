@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.shopapp.R;
-import com.example.shopapp.model.GetAllItems;
+import com.example.shopapp.data.GetAllItems;
 import com.example.shopapp.model.Item;
 import com.example.shopapp.util.RVAdapter;
 import com.example.shopapp.util.RequestQueueSingleton;
@@ -27,6 +27,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class FeaturedFragment extends Fragment implements RVAdapter.OnTapListener {
     private List<Item> items;
@@ -53,8 +54,8 @@ public class FeaturedFragment extends Fragment implements RVAdapter.OnTapListene
 
         try {
             items.addAll(new GetAllItems(getContext()).execute().get());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (InterruptedException | ExecutionException ex) {
+            Toast.makeText(getContext(), R.string.database_fail, Toast.LENGTH_SHORT).show();
         }
         configureRecyclerView(view);
         updateRecyclerView();
@@ -70,29 +71,27 @@ public class FeaturedFragment extends Fragment implements RVAdapter.OnTapListene
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private JsonArrayRequest getUserList() {
-        return new JsonArrayRequest("https://my-json-server.typicode.com/taralesca/json-server/items/",
+        return new JsonArrayRequest(getString(R.string.item_api),
                 response -> {
                     for (int index = 0; index < response.length(); index++) {
                         try {
                             final Item receivedItem = new Item().fromJSON(response.getJSONObject(index));
                             items.add(receivedItem);
                         } catch (JSONException ex) {
-                            Toast.makeText(getContext(), "fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), R.string.parse_fail, Toast.LENGTH_LONG).show();
                         }
                     }
                     updateRecyclerView();
                 },
                 error -> {
-                    Toast.makeText(getContext(), "fail", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.api_down, Toast.LENGTH_LONG).show();
                 }
         );
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void updateRecyclerView() {
-        adapter.swapDataSet(
-                items.stream().toArray(Item[]::new)
-        );
+        adapter.swapDataSet(items.toArray(new Item[0]));
     }
 
     @Override

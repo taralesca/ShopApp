@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">ShopApp</string>
+    <string name="item_api">https://my-json-server.typicode.com/taralesca/json-server/items/</string>
+    <string name="auth_failed">Authentication failed.</string>
+    <string name="register_success">Register successful!</string>
+    <string name="register_failed">Register failed.</string>
+    <string name="database_fail">Data fetching failed!</string>
+    <string name="parse_fail">Item parsing failed!</string>
+    <string name="api_down">Cannot retrieve data!</string>
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Description</string>
+    <string name="price_hint">Price</string>
+    <string name="sell_button_text">Post</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="log_in_hint">Log In</string>
+    <string name="register_hint">Register</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="submit_hint">Submit</string>
+    <string name="buy_button_hint">Buy</string>
 </resources>

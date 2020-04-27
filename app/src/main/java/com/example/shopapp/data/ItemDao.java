@@ -1,9 +1,11 @@
-package com.example.shopapp.model;
+package com.example.shopapp.data;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.shopapp.model.Item;
 
 import java.util.List;
 

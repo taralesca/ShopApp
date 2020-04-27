@@ -36,5 +36,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/button_style"
-        android:text="Buy" />
+        android:text="@string/buy_button_hint" />
 </LinearLayout>

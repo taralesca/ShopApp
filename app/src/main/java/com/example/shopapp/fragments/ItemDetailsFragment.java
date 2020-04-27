@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.shopapp.R;
-import com.example.shopapp.model.DeleteItem;
+import com.example.shopapp.data.DeleteItem;
 import com.example.shopapp.model.Item;
 
 public class ItemDetailsFragment extends Fragment {
@@ -42,15 +42,12 @@ public class ItemDetailsFragment extends Fragment {
         itemPrice.setText(item.getPrice().toString());
 
         Button buyButton = view.findViewById(R.id.buy_item);
-        buyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DeleteItem(getContext(), item.getId()).execute();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.main_frame, new HomeFragment());
-                fragmentTransaction.commit();
-            }
+        buyButton.setOnClickListener(v -> {
+            new DeleteItem(getContext(), item.getId()).execute();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.main_frame, new HomeFragment());
+            fragmentTransaction.commit();
         });
 
 

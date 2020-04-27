@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.shopapp.R;
-import com.example.shopapp.model.InsertItem;
+import com.example.shopapp.data.InsertItem;
 import com.example.shopapp.model.Item;
 
 public class SellFragment extends Fragment {
@@ -37,19 +37,16 @@ public class SellFragment extends Fragment {
         TextView priceField = view.findViewById(R.id.price_field);
         Button sellButton = view.findViewById(R.id.sell_button);
 
-        sellButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new InsertItem(getContext(),
-                        new Item(1,
-                                titleField.getText().toString(),
-                                descriptionField.getText().toString(),
-                                Double.valueOf(priceField.getText().toString()))).execute();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.main_frame, new HomeFragment());
-                fragmentTransaction.commit();
-            }
+        sellButton.setOnClickListener(v -> {
+            new InsertItem(getContext(),
+                    new Item(titleField.getText().toString(),
+                            descriptionField.getText().toString(),
+                            Double.valueOf(priceField.getText().toString()))).execute();
+
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.main_frame, new HomeFragment());
+            fragmentTransaction.commit();
         });
     }
 }
