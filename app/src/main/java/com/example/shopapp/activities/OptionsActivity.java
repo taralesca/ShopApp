@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.shopapp.R;
+import com.example.shopapp.fragments.FeaturedFragment;
 import com.example.shopapp.fragments.HomeFragment;
 import com.example.shopapp.fragments.SellFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +20,7 @@ public class OptionsActivity extends AppCompatActivity {
     HomeFragment home;
     //    FavoritesFragment favorites;
     SellFragment sell;
+    FeaturedFragment featured;
     private BottomNavigationView mainNav;
     private FrameLayout mainFrame;
 //    AccountFragment account;
@@ -33,6 +35,7 @@ public class OptionsActivity extends AppCompatActivity {
         home = new HomeFragment();
 //        favorites=new FavoritesFragment();
         sell = new SellFragment();
+        featured = new FeaturedFragment();
 //        account= new AccountFragment();
         setFragment(home);
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -42,9 +45,9 @@ public class OptionsActivity extends AppCompatActivity {
                     case R.id.it_home:
                         setFragment(home);
                         return true;
-//                    case R.id.it_fav:
-//                        setFragment(favorites);
-//                        return true;
+                    case R.id.it_featured:
+                        setFragment(featured);
+                        return true;
                     case R.id.it_sell:
                         setFragment(sell);
                         return true;
