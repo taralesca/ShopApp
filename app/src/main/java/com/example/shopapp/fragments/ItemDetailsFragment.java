@@ -1,5 +1,8 @@
 package com.example.shopapp.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.shopapp.R;
 import com.example.shopapp.data.DeleteItem;
 import com.example.shopapp.model.Item;
+import com.example.shopapp.util.AlarmReceiver;
+
+import java.util.Calendar;
+
+import static android.app.AlarmManager.RTC;
+import static android.content.Context.ALARM_SERVICE;
 
 public class ItemDetailsFragment extends Fragment {
     private Item item;
@@ -44,13 +53,25 @@ public class ItemDetailsFragment extends Fragment {
         Button buyButton = view.findViewById(R.id.buy_item);
         buyButton.setOnClickListener(v -> {
             new DeleteItem(getContext(), item.getId()).execute();
+            setAlarmForNotification();
+
             FragmentManager fm = getFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.main_frame, new HomeFragment());
             fragmentTransaction.commit();
         });
+    }
 
+    private void setAlarmForNotification() {
+        final AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(ALARM_SERVICE);
+        final Intent intent = new Intent(getContext(), AlarmReceiver.class);
+        intent.putExtra("message", item.getTitle());
+        final PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(getContext(), 101, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        final Calendar calendar = Calendar.getInstance();
+
+        alarmManager.set(RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
 

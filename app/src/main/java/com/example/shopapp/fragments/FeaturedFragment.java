@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.shopapp.R;
-import com.example.shopapp.data.GetAllItems;
 import com.example.shopapp.model.Item;
 import com.example.shopapp.util.RVAdapter;
 import com.example.shopapp.util.RequestQueueSingleton;
@@ -27,7 +26,6 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class FeaturedFragment extends Fragment implements RVAdapter.OnTapListener {
     private List<Item> items;
@@ -51,12 +49,6 @@ public class FeaturedFragment extends Fragment implements RVAdapter.OnTapListene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        try {
-            items.addAll(new GetAllItems(getContext()).execute().get());
-        } catch (InterruptedException | ExecutionException ex) {
-            Toast.makeText(getContext(), R.string.database_fail, Toast.LENGTH_SHORT).show();
-        }
         configureRecyclerView(view);
         updateRecyclerView();
     }
